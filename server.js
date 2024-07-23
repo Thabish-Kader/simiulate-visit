@@ -11,7 +11,9 @@ async function initializeBrowser() {
 async function simulateVisits() {
   try {
     const page = await browser.newPage();
-    await page.goto("https://google.com/", { waitUntil: "networkidle0" });
+    await page.goto("https://cheerful-kangaroo-de6763.netlify.app/", {
+      waitUntil: "networkidle0",
+    });
   } catch (error) {
     console.error("Error:", error);
   }
