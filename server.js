@@ -6,7 +6,7 @@ const app = express();
 let browser;
 
 async function initializeBrowser() {
-  browser = await puppeteer.launch({ headless: false });
+  browser = await puppeteer.launch({ headless: true });
 }
 async function simulateVisits() {
   try {
