@@ -26,6 +26,10 @@ app.get("/simulation", async (req, res) => {
   }
 });
 
+app.get("/", async (req, res) => {
+  res.status(200).send("Api Working");
+});
+
 app.listen(3000, async () => {
   await initializeBrowser();
   console.log("Server started on port 3000");
