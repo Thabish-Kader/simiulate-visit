@@ -3,17 +3,15 @@ const puppeteer = require("puppeteer");
 
 const app = express();
 
-let browser;
-
-async function initializeBrowser() {
-  browser = await puppeteer.launch({ headless: true });
-}
 async function simulateVisits() {
   try {
+    const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
     await page.goto("https://cheerful-kangaroo-de6763.netlify.app/", {
       waitUntil: "networkidle0",
     });
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+    await browser.close();
   } catch (error) {
     console.error("Error:", error);
   }
@@ -22,6 +20,7 @@ async function simulateVisits() {
 app.get("/simulation", async (req, res) => {
   try {
     await simulateVisits();
+    console.log("Simulation HIT");
     res.send("Simulation started");
   } catch (error) {
     res.status(500).send("Error: " + error);
@@ -33,6 +32,5 @@ app.get("/", async (req, res) => {
 });
 
 app.listen(3000, async () => {
-  await initializeBrowser();
   console.log("Server started on port 3000");
 });
